@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <title>TodoList</title>
+    <link rel="shortcut icon" href="img/todoListFavicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <!-- Logotipo do TodoList-->
+    <div id="app">
+        <div class="center">
+            <img src="img/todoList.png" alt="Ícone da Aplicação">
+        </div>
+
+        <!--Feedback de carregamento (Loading...)-->
+        <div id="loading">
+            <img src="img/loading.gif" alt="Carregando">
+        </div>
+
+        <!--Conteúdo destinado para usuários não autenticados-->
+        <div id="auth" class="center">
+            <!--Formulário de autenticação-->
+            <form id="authForm">
+                <h3 id="authFormTitle">Acesse sua conta para continuar</h3>
+
+                <label for="email">E-mail:</label>
+                <input type="email" placeholder="E-mail" id="email">
+
+                <label for="password">Senha:</label>
+                <input type="password" placeholder="Senha:" id="password">
+
+                <button type="submit" id="submitAuthForm">Acessar</button>
+            </form>
+
+            <!--Alterar o formulário de autenticação para o cadastro de novas contas-->
+            <p id="register">
+                Não possui uma conta?
+                <button onclick="toggleToRegister()" class="alternative">Cadastrar uma nova conta</button>
+            </p>
+
+            <!--Alterar o formulário de autenticação para o acesso de contas já existentes-->
+            <p id="access" class="startHidden">
+                Já possui uma conta?
+                <button onclick="toggleToAccess()" class="alternative">Acesse a sua conta</button>
+            </p>
+        </div>
+
+        <!--Conteúdo destinado para usuários autenticados-->
+        <div id="userContent" class="startHidden">
+            <hr>
+            <div id="userInfo" class="center">
+                <p>Autenticado com:</p>
+                <p id="userEmail"></p>
+                <button class="alternative" onclick="signOut()">Sair</button>
+            </div>
+        </div>
+    </div>
+
+    <!--Recursos do Firebase-->
+    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
+
+    <!--Nossa programação em JavaScript-->
+    <script src="js/utils.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
