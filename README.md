@@ -1,4 +1,4 @@
-# TodoList
+# TodoList (UNDERCONSTRUCTION)
 Projeto TodoList simples aplicação em HTML,
 CSS, JavaScript com o intuito de abordar as
 Configurações gerais de hospedagem de funcionalidades
