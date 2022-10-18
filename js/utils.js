@@ -14,20 +14,25 @@ var userEmail = document.getElementById('userEmail')
 var sendEmailVerificationDiv = document.getElementById('sendEmailVerificationDiv')
 var emailVerified = document.getElementById('emailVerified')
 
+var passwordReset = document.getElementById('passwordReset')
+
+
 //Alterar o formulário de autenticação para o cadastro de novas contas
 function toggleToRegister() {
   authForm.submitAuthForm.innerHTML = 'Cadastrar conta'
   authFormTitle.innerHTML = 'Isira seus dados para se cadastrar'
-  hideItem(register)
-  showItem(access)
+  hideItem(register) // Esconder atalho para cadastrar conta
+  hideItem(passwordReset) // Esconder opção de redefinição de senha
+  showItem(access) // Mostrar atalho pra acessar conta
 }
 
 //Alterar o formulário de autenticação para o acesso de contas já existentes
 function toggleToAccess() {
   authForm.submitAuthForm.innerHTML = 'Acessar'
   authFormTitle.innerHTML = 'Acesse sua conta para continuar'
-  hideItem(access)
-  showItem(register)
+  hideItem(access)  // Esconder atalho para acessar conta
+  showItem(passwordReset) // mostrar opção de redefinição de senha
+  showItem(register) // Mostrar atalho para cadastrar conta
 }
 
 //Simplifica a exibição de elementos da página
