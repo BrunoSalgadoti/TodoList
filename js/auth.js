@@ -1,3 +1,6 @@
+//Traduz parea português brasileiro a autenticação do Firebase
+firebase.auth().languageCode = 'pt-BR'
+
 //Função que trata a submissão do formulário de autenticação
 authForm.onsubmit = function (evento) {
   showItem(loading);
@@ -9,6 +12,7 @@ authForm.onsubmit = function (evento) {
       .catch(function (error) {
         console.log("Falha no acesso");
         console.log(error);
+        hideItem(loading);
       });
   } else {
     firebase
@@ -20,6 +24,7 @@ authForm.onsubmit = function (evento) {
       .catch(function (error) {
         console.log("Falha no cadastro");
         console.log(error);
+        hideItem(loading);
       });
   }
 };
@@ -42,5 +47,27 @@ function signOut() {
     .catch(function (error) {
       console.log("Falha ao sair da conta");
       console.log(error);
+    });
+}
+
+//Função que permite ao usuário fazer a verificação do e-mail dele
+function sendEmailVerification() {
+  showItem(loading);
+  var user = firebase.auth().currentUser;
+  user
+    .sendEmailVerification(actionCodeSettings)
+    .then(function () {
+      alert(
+        "E-mail de verificação foi enviado para " +
+          user.email +
+          "! Verifique a sua caixa de entrada"
+      );
+    })
+    .catch(function (error) {
+      alert("Houve um erro ao enviar o e-mail de verificação");
+      console.log(error);
+    })
+    .finally(function () {
+      hideItem(loading);
     });
 }
