@@ -75,6 +75,24 @@ function showAuth(){
   showItem(auth)
 }
 
+//Centralizar e traduzir erros
+function showError(prefix, error) {
+  console.log(error.code)
+  hideItem(loading)
+  switch (error.code) {
+    case 'auth/invalid-email': 
+    case 'auth/wrong-password': alert(prefix + '' + 'E-mail ou senha inválidos!')
+    break;
+    case 'auth/weak-password': alert(prefix + '' + 'Senha deve conter no mínimo 6 caracteres!')
+    break;
+    case 'auth/email-already-in-use': alert(prefix + '' + 'E-mail já cadastrado por outra conta!')
+    break;
+    case 'auth/popup-closed-by-user': alert(prefix + '' + 'Popup fechado pelo usuário antes de finalizar operação!')
+    break;
+
+    default: alert(prefix + '' + error.message)
+  }
+}
 //Atributos extras de configuração de e-mail
 var actionCodeSettings = {
   url: 'http://127.0.0.1:5500/'

@@ -1,18 +1,16 @@
 //Traduz parea português brasileiro a autenticação do Firebase
-firebase.auth().languageCode = 'pt-BR'
+firebase.auth().languageCode = "pt-BR";
 
 //Função que trata a submissão do formulário de autenticação
 authForm.onsubmit = function (evento) {
   showItem(loading);
   event.preventDefault();
-  if (authForm.submitAuthForm.innerHTML == 'Acessar') {
+  if (authForm.submitAuthForm.innerHTML == "Acessar") {
     firebase
       .auth()
       .signInWithEmailAndPassword(authForm.email.value, authForm.password.value)
       .catch(function (error) {
-        console.log('Falha no acesso');
-        console.log(error);
-        hideItem(loading);
+        showError("Falha no acesso: ", error);
       });
   } else {
     firebase
@@ -22,9 +20,7 @@ authForm.onsubmit = function (evento) {
         authForm.password.value
       )
       .catch(function (error) {
-        console.log('Falha no cadastro');
-        console.log(error);
-        hideItem(loading);
+        showError("Falha no cadastro: ", error);
       });
   }
 };
@@ -45,8 +41,7 @@ function signOut() {
     .auth()
     .signOut()
     .catch(function (error) {
-      console.log('Falha ao sair da conta');
-      console.log(error);
+      showError("Falha ao sair da conta: ", error);
     });
 }
 
@@ -58,14 +53,13 @@ function sendEmailVerification() {
     .sendEmailVerification(actionCodeSettings)
     .then(function () {
       alert(
-        'E-mail de verificação foi enviado para ' +
+        "E-mail de verificação foi enviado para " +
           user.email +
-          'Verifique a sua caixa de entrada!'
+          "Verifique a sua caixa de entrada!"
       );
     })
     .catch(function (error) {
-      alert('Houve um erro ao enviar o e-mail de verificação');
-      console.log(error);
+      showError("Falha ao enviar mensagem de verificação de e-mail: ", error);
     })
     .finally(function () {
       hideItem(loading);
@@ -73,50 +67,108 @@ function sendEmailVerification() {
 }
 
 //Função que permite o usuário redefinir a senha dele
-function sendPasswordResetEmail(){
-  var email = prompt('Redefinir senha! Informe o seu endereço de E-mail.', authForm.email.value)
-  if(email) {
-    showItem(loading)
-    firebase.auth().sendPasswordResetEmail(email, actionCodeSettings).then(function (){
-      alert('E-mail de redefinição de senha foi enviado para: ' + email + '.' )
-    }).catch(function(error){
-      alert('Houve um erro ao enviar o E-mail de redefinição de senha!!!')
-      console.log(error)
-    }).finally(function () {
-      hideItem(loading)
-    })
-  }else {
-    alert('É preciso preencher o campo de E-mail para redefinir a senha!')
+function sendPasswordResetEmail() {
+  var email = prompt(
+    "Redefinir senha! Informe o seu endereço de E-mail.",
+    authForm.email.value
+  );
+  if (email) {
+    showItem(loading);
+    firebase
+      .auth()
+      .sendPasswordResetEmail(email, actionCodeSettings)
+      .then(function () {
+        alert(
+          "E-mail de redefinição de senha foi enviado para: " + email + "."
+        );
+      })
+      .catch(function (error) {
+        showError("Falha ao enviar e-mail de redefinição de senha: ", error);
+      })
+      .finally(function () {
+        hideItem(loading);
+      });
+  } else {
+    alert("É preciso preencher o campo de E-mail para redefinir a senha!");
   }
 }
 
 //Função que permite a autenticação pelo Google
 function singInWithGoogle() {
-  showItem(loading)
-  firebase.auth().signInWithPopup( new firebase.auth.GoogleAuthProvider()).catch(function (error) { //ou
-  //firebase.auth().signInWithRedirect( new firebase.auth.GoogleAuthProvider()).catch(function (error) { 
-    alert('Houve um erro ao autenticar usando o Google')
-    console.log(error)
-    hideItem(loading)
-  })
+  showItem(loading);
+  firebase
+    .auth()
+    .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    .catch(function (error) {
+      //ou
+      //firebase.auth().signInWithRedirect( new firebase.auth.GoogleAuthProvider()).catch(function (error) {
+      showError("Falha ao autenticar usando o Google: ", error)
+    });
 }
 
 //Função que permite a autenticação pelo GitHub
 function singInWithGitHub() {
-  showItem(loading)
-  firebase.auth().signInWithPopup( new firebase.auth.GithubAuthProvider()).catch(function (error) { 
-    alert('Houve um erro ao autenticar usando o GitHub')
-    console.log(error)
-    hideItem(loading)
-  })
+  showItem(loading);
+  firebase
+    .auth()
+    .signInWithPopup(new firebase.auth.GithubAuthProvider())
+    .catch(function (error) {
+      showError("Falha ao autenticar usando o GitHub: ", error)
+    });
 }
 
 //Função que permite a autenticação pelo Facebook
 function singInWithFacebook() {
-  showItem(loading)
-  firebase.auth().signInWithPopup( new firebase.auth.FacebookAuthProvider()).catch(function (error) { 
-    alert('Houve um erro ao autenticar usando o Facebook')
-    console.log(error)
-    hideItem(loading)
-  })
+  showItem(loading);
+  firebase
+    .auth()
+    .signInWithPopup(new firebase.auth.FacebookAuthProvider())
+    .catch(function (error) {
+      showError("Falha ao autenticar usando o Facebook: ", error)
+    });
+}
+
+//Função que permite atualizar nomes de usuários
+function updateUserName() {
+  var newUserName = prompt(
+    "Informe um novo nome de usuário",
+    userName.innerHTML
+  );
+  if (newUserName && newUserName != "") {
+    userName.innerHTML = newUserName;
+    showItem(loading);
+    firebase
+      .auth()
+      .currentUser.updateProfile({
+        displayName: newUserName,
+      })
+      .catch(function (error) {
+        showError("Falha ao atualizar o nome do usuário: ", error)
+      })
+      .finally(function () {
+        hideItem(loading);
+      });
+  } else {
+    alert("O nome do usuário não pode está em branco");
+  }
+}
+
+//Função que permite remover contas de usuário
+function deleteUserAccount() {
+  var confirmation = confirm("Realmente deseja excluir sua conta?");
+  if (confirmation) {
+    showItem(loading);
+    firebase
+      .auth()
+      .currentUser.delete()
+      .then(function () {
+        alert("Conta foi removida com sucesso!");
+      })
+      .catch(function (error) {
+        showError("Falha ao remover a sua conta!: ", error)
+      })
+      .finally(function () {
+        hideItem(loading);
+      });
+  }
 }
