@@ -52,13 +52,22 @@
                 Já possui uma conta?
                 <button onclick="toggleToAccess()" class="alternative">Acesse a sua conta</button>
             </p>
+
+            <!--Outros provedores de autenticação-->
+            <p>
+                Ou acesse usando:<br>
+                <img src="img/google.png" alt="Autenticação pelo Google" onclick="singInWithGoogle()">
+                <img src="/img/github.png" alt="Autenticação pelo do GitHub" onclick="singInWithGitHub()">
+                <img src="/img/facebook.png" alt="Autenticação pelo do Facebook" onclick="singInWithFacebook()">
+            </p>
         </div>
 
         <!--Conteúdo destinado para usuários autenticados-->
         <div id="userContent" class="startHidden">
             <hr>
             <div id="userInfo" class="center">
-                <p>Autenticado com:</p>
+                <img id="userImg">
+                <p id="userName"></p>
                 <p id="userEmail"></p>
                 <p id="emailVerified"></p>
                 <div id="sendEmailVerificationDiv">

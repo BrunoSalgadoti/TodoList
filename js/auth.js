@@ -5,12 +5,12 @@ firebase.auth().languageCode = 'pt-BR'
 authForm.onsubmit = function (evento) {
   showItem(loading);
   event.preventDefault();
-  if (authForm.submitAuthForm.innerHTML == "Acessar") {
+  if (authForm.submitAuthForm.innerHTML == 'Acessar') {
     firebase
       .auth()
       .signInWithEmailAndPassword(authForm.email.value, authForm.password.value)
       .catch(function (error) {
-        console.log("Falha no acesso");
+        console.log('Falha no acesso');
         console.log(error);
         hideItem(loading);
       });
@@ -22,7 +22,7 @@ authForm.onsubmit = function (evento) {
         authForm.password.value
       )
       .catch(function (error) {
-        console.log("Falha no cadastro");
+        console.log('Falha no cadastro');
         console.log(error);
         hideItem(loading);
       });
@@ -45,7 +45,7 @@ function signOut() {
     .auth()
     .signOut()
     .catch(function (error) {
-      console.log("Falha ao sair da conta");
+      console.log('Falha ao sair da conta');
       console.log(error);
     });
 }
@@ -58,13 +58,13 @@ function sendEmailVerification() {
     .sendEmailVerification(actionCodeSettings)
     .then(function () {
       alert(
-        "E-mail de verificação foi enviado para " +
+        'E-mail de verificação foi enviado para ' +
           user.email +
-          "! Verifique a sua caixa de entrada"
+          'Verifique a sua caixa de entrada!'
       );
     })
     .catch(function (error) {
-      alert("Houve um erro ao enviar o e-mail de verificação");
+      alert('Houve um erro ao enviar o e-mail de verificação');
       console.log(error);
     })
     .finally(function () {
@@ -88,4 +88,35 @@ function sendPasswordResetEmail(){
   }else {
     alert('É preciso preencher o campo de E-mail para redefinir a senha!')
   }
+}
+
+//Função que permite a autenticação pelo Google
+function singInWithGoogle() {
+  showItem(loading)
+  firebase.auth().signInWithPopup( new firebase.auth.GoogleAuthProvider()).catch(function (error) { //ou
+  //firebase.auth().signInWithRedirect( new firebase.auth.GoogleAuthProvider()).catch(function (error) { 
+    alert('Houve um erro ao autenticar usando o Google')
+    console.log(error)
+    hideItem(loading)
+  })
+}
+
+//Função que permite a autenticação pelo GitHub
+function singInWithGitHub() {
+  showItem(loading)
+  firebase.auth().signInWithPopup( new firebase.auth.GithubAuthProvider()).catch(function (error) { 
+    alert('Houve um erro ao autenticar usando o GitHub')
+    console.log(error)
+    hideItem(loading)
+  })
+}
+
+//Função que permite a autenticação pelo Facebook
+function singInWithFacebook() {
+  showItem(loading)
+  firebase.auth().signInWithPopup( new firebase.auth.FacebookAuthProvider()).catch(function (error) { 
+    alert('Houve um erro ao autenticar usando o Facebook')
+    console.log(error)
+    hideItem(loading)
+  })
 }
