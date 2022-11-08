@@ -3,19 +3,17 @@ var authForm = document.getElementById('authForm')
 var authFormTitle = document.getElementById('authFormTitle')
 var register = document.getElementById('register')
 var access = document.getElementById('access')
-
 var loading = document.getElementById('loading')
-
 var auth = document.getElementById('auth')
 var userContent = document.getElementById('userContent')
 var userEmail = document.getElementById('userEmail')
 var sendEmailVerificationDiv = document.getElementById('sendEmailVerificationDiv')
 var emailVerified = document.getElementById('emailVerified')
 var passwordReset = document.getElementById('passwordReset')
-
 var userName = document.getElementById('userName')
 var userImg = document.getElementById('userImg') 
 
+var todoForm = document.getElementById('todoForm')
 
 //Alterar o formulário de autenticação para o cadastro de novas contas
 function toggleToRegister() {
@@ -81,20 +79,23 @@ function showError(prefix, error) {
   hideItem(loading)
   switch (error.code) {
     case 'auth/invalid-email': 
-    case 'auth/wrong-password': alert(prefix + '' + 'E-mail ou senha inválidos!')
+    case 'auth/wrong-password': alert(prefix + ' ' + 'E-mail ou senha inválidos!')
     break;
-    case 'auth/weak-password': alert(prefix + '' + 'Senha deve conter no mínimo 6 caracteres!')
+    case 'auth/weak-password': alert(prefix + ' ' + 'Senha deve conter no mínimo 6 caracteres!')
     break;
-    case 'auth/email-already-in-use': alert(prefix + '' + 'E-mail já cadastrado por outra conta!')
+    case 'auth/email-already-in-use': alert(prefix + ' ' + 'E-mail já cadastrado por outra conta!')
     break;
-    case 'auth/popup-closed-by-user': alert(prefix + '' + 'Popup fechado pelo usuário antes de finalizar operação!')
+    case 'auth/popup-closed-by-user': alert(prefix + ' ' + 'Popup fechado pelo usuário antes de finalizar operação!')
     break;
 
-    default: alert(prefix + '' + error.message)
+    default: alert(prefix + ' ' + error.message)
   }
 }
 //Atributos extras de configuração de e-mail
 var actionCodeSettings = {
-  url: 'http://127.0.0.1:5500/'
+  url: 'https://todolist-df89e.web.app'
 }
 
+
+var database = firebase.database()
+var dbRefUsers = database.ref('users')
