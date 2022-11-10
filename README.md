@@ -1,4 +1,4 @@
-# TodoList (UNDERCONSTRUCTION) ![Underconstruction](https://user-images.githubusercontent.com/93531387/191990916-a09c9574-7247-4c7e-ba99-53f7474aeb78.jpg)
+# TodoList (UNDER CONSTRUCTION) ![Underconstruction](https://user-images.githubusercontent.com/93531387/191990916-a09c9574-7247-4c7e-ba99-53f7474aeb78.jpg)
 Projeto TodoList simples aplicação em HTML,
 CSS, JavaScript com o intuito de abordar as
 Configurações gerais de hospedagem de funcionalidades
