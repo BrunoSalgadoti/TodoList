@@ -14,6 +14,8 @@ var userName = document.getElementById('userName')
 var userImg = document.getElementById('userImg') 
 
 var todoForm = document.getElementById('todoForm')
+var todoCount = document.getElementById('todoCount')
+var ulTodoList = document.getElementById('ulTodoList')
 
 //Alterar o formulário de autenticação para o cadastro de novas contas
 function toggleToRegister() {
@@ -43,7 +45,7 @@ function hideItem(element) {
   element.style.display = 'none'
 }
 
-//Mostrar conteúdo para usuário autenticado
+//Mostrar conteúdo para usuários autenticados
 function showUserContent(user){
   console.log(user)
   if (user.providerData[0].providerId != 'password') {
@@ -58,10 +60,16 @@ function showUserContent(user){
       showItem(sendEmailVerificationDiv)
     }
   }
+
   userImg.src = user.photoURL ? user.photoURL : 'img/unknownUser.png'
   userName.innerHTML = user.displayName
   userEmail.innerHTML = user.email
   hideItem(auth)
+
+  dbRefUsers.child(firebase.auth().currentUser.uid).on('value', function (dataSnapshot) {
+    fillTodoList(dataSnapshot)
+  })
+
   showItem(userContent)
 }
 
