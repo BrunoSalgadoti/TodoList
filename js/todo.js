@@ -1,10 +1,11 @@
 // Trata a submissão do formulário de tarefas
 todoForm.onsubmit = function (event) {
-  event.preventDefault(); // Evita o redirecionamento da página
+  event.preventDefault() // Evita o redirecionamento da página
   if (todoForm.name.value != '') {
     var data = {
       name: todoForm.name.value,
-    };
+      nameLowerCase: todoForm.name.value.toLowerCase()
+    }
 
     dbRefUsers
       .child(firebase.auth().currentUser.uid)
@@ -13,7 +14,7 @@ todoForm.onsubmit = function (event) {
         console.log('Tarefa "' + data.name + '" adicionada com sucesso')
       })
       .catch(function (error) {
-        showError('Falha ao adicionar tarefa: ', error)
+        showError('Falha ao adicionar tarefa. (use no máximo 30 caracteres): ', error)
       })
 
       todoForm.name.value = ''
@@ -82,6 +83,7 @@ function updateTodo(key) {
   if (newTodoName != '') {
     var data = {
       name: newTodoName,
+      nameLowerCase: newTodoName.toLowerCase()
     }
 
     dbRefUsers
