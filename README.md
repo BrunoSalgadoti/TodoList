@@ -1,21 +1,40 @@
-# TodoList
-Projeto TodoList simples aplicação em HTML,
-CSS, JavaScript com o intuito de abordar as
-Configurações gerais de hospedagem de funcionalidades
-do FIREBASE como o FIREBASE AUTHENTICATION (Autenticação e
-verificação dos E-mails dos usuários e sua autenticidade via
-FIREBASE e outros provedores de autenticação para acesso),
-REALTIME DATABASE e CLOUD FIRESTORE (armazenar e gerenciar os
-dados de usuários filtrar e classificar os dados de acordo com
-a capacidade de consulta de cada um desses Bancos de Dados),                        
-CLOUND STORAGE (armazenamento e gerenciamento de fotos e vídeos
-dos usuários com controle de fluxo das operações como pausar,
-continuar e cancelar as operações), FIREBASE HOSTING (Hospedar
-as aplicações de forma simples rápida e segura) e DEFINIÇÕES DE
-REGRAS DE SEGURANÇA (para validar os dados que circulam na aplicação
-e impedir que esses dados sejam acessados por usuários não
-autorizados) projeto contextualizado na criação de um sistema de
-CADASTROS DE TAREFAS simples, utilizando as linguagens supracitadas
-sem necessidade de frameworks, bibliotecas ou outros recursos
-desnecessários para a interação com o FIREBASE e suas ferramentas
+# Task Management Application (Educational Project)
+
+## 📑 Overview
+TodoList is a web-based task management application developed to demonstrate core web development concepts and Firebase integration.
+
+The project focuses on structuring a simple and functional interface for task organization, including data persistence and user interaction through a clean and responsive layout.
+
+It serves as a practical implementation of front-end fundamentals combined with backend services.
+
+---
+
+## 📌 Features
+- Task creation and deletion
+- Real-time data storage with Firebase
+- Structured UI for task visualization
+- Basic interaction handling (add/remove tasks)
+- Simple and functional user interface
+
+---
+
+## 🛠️ Tech Stack
+- HTML
+- CSS
+- JavaScript
+- Firebase (Authentication / Database)
+
+---
+
+## ⚙️ Status
+Completed
+
+---
+
+## 🎯 Purpose
+Educational / Technical Demonstration
+
+This project was developed to reinforce core web development skills and demonstrate integration with Firebase services, focusing on data handling and interface structuring.
+
+---
 
